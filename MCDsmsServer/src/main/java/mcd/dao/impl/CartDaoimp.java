@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import mcd.biz.impl.FoodBizimp;
 import mcd.dao.CartDao;
 import mcd.dao.FoodDao;
 import mcd.domain.Cart;
@@ -20,9 +20,9 @@ public class CartDaoimp implements CartDao{
 		db=new DbUtil();
 		List<Cart> list=new ArrayList<Cart>();
 		//sql语句不确定
-		String sql="select c.* from Cart c,or-ca oc where oc.oid=? and c.sid=oc.sid";
+		String sql="select c.* from Cart c,or_ca oc where oc.oid=? and c.sid=oc.sid";
 		try {
-			ResultSet rs=this.db.Query(sql);
+			ResultSet rs=this.db.Query(sql,oid);
 			while(rs.next()) {
 				list.add(new Cart(rs.getInt(1), rs.getInt(2),rs.getInt(3) ));
 			}
@@ -43,7 +43,7 @@ public class CartDaoimp implements CartDao{
 		db=new DbUtil();
 		int foodid;
 		int cartnum;
-		String sql1="delete from or-ca where sid=?";
+		String sql1="delete from or_ca where sid=?";
 		try {
 			int i1=this.db.Update(sql1, sid);
 			if (i1>0) {
@@ -52,15 +52,12 @@ public class CartDaoimp implements CartDao{
 				if (rs.next()) {
 					foodid=rs.getInt(1);
 					cartnum=rs.getInt(2);
-					String sql3="update food set sellnum=? where fid=?";
-					int i2=this.db.Update(sql3, cartnum,foodid);
-					if (i2>0) {
+					this.fd.updatesellnum(foodid, -cartnum);
+					
 						String sql4="delete from cart where sid=?";
 						int i3=this.db.Update(sql4, sid);
 						return i3>0;
-					}else {
-						return false;
-					}
+
 				}else {
 					return false;
 				}	
@@ -81,14 +78,14 @@ public class CartDaoimp implements CartDao{
 		db=new DbUtil();
 		int oldnum;
 		int foodid;
-		String sql1="select onum cart where sid=?";
+		String sql1="select onum from cart where sid=?";
 
 		try {
 			ResultSet rs1=this.db.Query(sql1, sid);
 			if (rs1.next()) {
 				oldnum=rs1.getInt(1);
 				String sql2="update cart set onum=? where sid=?";
-				int i1=this.db.Update(sql2, onum);
+				int i1=this.db.Update(sql2, onum,sid);
 				if (i1>0) {
 					String sql3="select fid from cart where sid=?";
 					ResultSet rs2=this.db.Query(sql3, sid);
@@ -119,11 +116,12 @@ public class CartDaoimp implements CartDao{
 		// TODO Auto-generated method stub
 		db=new DbUtil();
 		int sid;
-		String sql1="insert into Cart (fid,num)values (?,?)";
+		String sql1="insert into Cart (fid,onum)values (?,?)";
 		try {
 			int i1=this.db.Update(sql1,fid,onum);
 			if (i1>0) {
-				String sql2 ="select sid from cart order by desc";
+				fd.updatesellnum(fid, onum);
+				String sql2 ="select sid from cart order by sid desc";
 				ResultSet rs=this.db.Query(sql2);
 				if (rs.next()) {
 					sid=rs.getInt(1);

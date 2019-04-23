@@ -41,10 +41,9 @@ public class Cart implements Serializable{
 	}
 	@Override
 	public String toString() {
-		
-			return cid + "\t" + fid + "\t" +num ;
-			
+		return cid + "\t" + fid + "\t" +num ;
 	}
+
 	
 	
 }

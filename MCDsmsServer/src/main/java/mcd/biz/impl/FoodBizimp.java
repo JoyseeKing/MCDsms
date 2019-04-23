@@ -30,7 +30,7 @@ public class FoodBizimp implements FoodBiz{
 
 	public String updatestatus(int fid, int status) {
 		// TODO Auto-generated method stub
-		return this.foodDao.updatestatus(fid, status)?"挂失状态更改成功":"挂失更改成功";
+		return this.foodDao.updatestatus(fid, status)?"菜品状态已更改":"菜品状态更改失败";
 	}
 
 	public List<Food> findAllFoodTypes() {
@@ -48,9 +48,14 @@ public class FoodBizimp implements FoodBiz{
 		return this.foodDao.updatesellnum(fid, num);
 	}
 
-	public String foodCutOff(int fid, int cut) {
+	public String foodCutOff(int fid, double cut) {
 		// TODO Auto-generated method stub
 		return this.foodDao.foodCutOff(fid, cut)?"设置折扣成功":"设置折扣失败";
+	}
+	@Override
+	public List<Food> findTopFiveMonth() {
+		// TODO Auto-generated method stub
+		return this.foodDao.findTopFiveMonth();
 	}
 
 	

@@ -1,6 +1,7 @@
 package mcd.serviceimp;
 
 
+import java.util.Date;
 import java.util.List;
 
 import mcd.biz.CartBiz;
@@ -17,7 +18,6 @@ import mcd.biz.impl.EmpBizimp;
 import mcd.biz.impl.FoodBizimp;
 import mcd.biz.impl.ManagerBizimp;
 import mcd.biz.impl.OrderBizimp;
-import mcd.dao.impl.CartDaoimp;
 import mcd.domain.Cart;
 import mcd.domain.Custom;
 import mcd.domain.Dining;
@@ -88,7 +88,7 @@ public class TotalServiceimp implements TotalService{
 
 	public Manager mlogin(String account) {
 		// TODO Auto-generated method stub
-		return this.mlogin(account);
+		return this.managerbiz.mlogin(account);
 	}
 
 	public String mregist(int id, String account, String password, String name) {
@@ -128,7 +128,7 @@ public class TotalServiceimp implements TotalService{
 
 	public Order FindOrderbyid(String oid) {
 		// TODO Auto-generated method stub
-		return this.FindOrderbyid(oid);
+		return this.orderBiz.FindOrderbyid(oid);
 	}
 
 	public String outXML(int eid) {
@@ -166,7 +166,7 @@ public class TotalServiceimp implements TotalService{
 		return this.foodBiz.updatesellnum(fid, num);
 	}
 
-	public String foodCutOff(int fid, int cut) {
+	public String foodCutOff(int fid, double cut) {
 		// TODO Auto-generated method stub
 		return this.foodBiz.foodCutOff(fid, cut);
 	}
@@ -216,10 +216,17 @@ public class TotalServiceimp implements TotalService{
 		return this.customBiz.updatebalance(vipid, pay);
 	}
 
-	public String updateOrderByoid(String oid, double ototal, double ocollcet, double ochange, String date) {
+	public String updateOrderByoid(String oid, double ototal, double ocollcet, double ochange, Date date) {
 		// TODO Auto-generated method stub
 		return this.orderBiz.updateOrderByoid(oid, ototal, ocollcet, ochange, date);
 	}
 
+	@Override
+	public List<Food> findTopFiveMonth() {
+		// TODO Auto-generated method stub
+		return this.foodBiz.findTopFiveMonth();
+	}
+
+	
 	
 }

@@ -1,5 +1,7 @@
 package mcd.dao;
 
+import java.util.Date;
+
 import mcd.domain.Order;
 
 public interface OrderDao {
@@ -10,5 +12,5 @@ public interface OrderDao {
 		//导出订单
 		public boolean outXML(int eid);
 		//根据oid修改订单
-		public boolean updateOrderByoid(String oid,double ototal,double ocollcet,double ochange,String date);
+		public boolean updateOrderByoid(String oid,double ototal,double ocollcet,double ochange,Date  date);
 }

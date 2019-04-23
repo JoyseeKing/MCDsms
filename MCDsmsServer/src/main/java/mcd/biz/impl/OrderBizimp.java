@@ -2,6 +2,8 @@ package mcd.biz.impl;
 
 
 
+import java.util.Date;
+
 import mcd.biz.OrderBiz;
 import mcd.dao.OrderDao;
 import mcd.dao.impl.OrderDaoimp;
@@ -29,7 +31,7 @@ public class OrderBizimp implements OrderBiz{
 		return this.orderDao.outXML(eid)?"导出成功":"导出失败";
 	}
 
-	public String updateOrderByoid(String oid, double ototal, double ocollcet, double ochange, String date) {
+	public String updateOrderByoid(String oid, double ototal, double ocollcet, double ochange, Date date) {
 		// TODO Auto-generated method stub
 		return this.orderDao.updateOrderByoid(oid, ototal, ocollcet, ochange, date)?"订单已生成":"订单生成失败";
 	}

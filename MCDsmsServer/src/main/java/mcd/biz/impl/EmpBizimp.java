@@ -51,7 +51,7 @@ public class EmpBizimp implements EmpBiz{
 
 	public String updateEmployee(int eid, String password, String name, int mid) {
 		// TODO Auto-generated method stub
-		return this.empDao.updateEmployee(eid, password, name, mid)?"更改失败":"更改成功";
+		return this.empDao.updateEmployee(eid, password, name, mid)?"更改成功":"更改失败";
 	}
 
 }

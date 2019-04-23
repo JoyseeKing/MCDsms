@@ -17,6 +17,7 @@ import org.bytedeco.javacv.OpenCVFrameGrabber;
 public class Camera {
 	private boolean flag = true;
 
+
 	public String face(String file) throws Exception {
 			String savedImageFile = file+".jpg";
 			OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);

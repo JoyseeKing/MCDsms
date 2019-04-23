@@ -54,7 +54,7 @@ public class DbUtil {
 		
 	}
 	public int Update(String sql,Object...arr) throws SQLException {
-		statement=connection.createStatement();
+		preparedStatement=connection.prepareStatement(sql);
 		for (int i = 0; i < arr.length; i++) {
 			preparedStatement.setObject(i+1, arr[i]);
 		}

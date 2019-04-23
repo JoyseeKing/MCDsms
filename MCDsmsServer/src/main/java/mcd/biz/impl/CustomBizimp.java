@@ -32,7 +32,7 @@ public class CustomBizimp implements CustomBiz{
 
 	public boolean updatebalance(int vipid, double pay) {
 		// TODO Auto-generated method stub
-		return this.updatebalance(vipid, pay);
+		return this.customDao.updatebalance(vipid, pay);
 	}
 
 	public String updateisfrezz(int vipid, String isfrezz) {

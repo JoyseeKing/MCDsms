@@ -1,6 +1,7 @@
 package mcd.service;
 
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -63,7 +64,7 @@ public interface TotalService {
 	//更新销量 num是增加的数量  不要调用  在daoimp我自己调用
 	public int updatesellnum(int fid,int num);
 	//菜品修改折扣 输入折扣
-	public String foodCutOff(int fid,int cut);
+	public String foodCutOff(int fid,double cut);
 	//菜品信息修改信息 通过菜品Id
 	public String updateFood(int fid, String fname, double fprice, int sellnum, int fstatus, int typeid);
 	//查询下属
@@ -83,5 +84,8 @@ public interface TotalService {
 	//充值
 	public boolean updatebalance(int vipid,double pay);
 	//根据oid修改订单
-	public String updateOrderByoid(String oid,double ototal,double ocollcet,double ochange,String date);
+	public String updateOrderByoid(String oid,double ototal,double ocollcet,double ochange,Date date);
+	//查询一个月的前五
+	public List<Food> findTopFiveMonth();
+	
 }

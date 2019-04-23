@@ -16,9 +16,13 @@ public class DinDaoimp implements DinDao{
 		String sql="select * from dining where dinid=?";
 		try {
 			ResultSet rs=this.db.Query(sql,dinid);
-			dining=(new Dining(rs.getInt(1),rs.getString(2)));
-			return dining;
-		} catch (SQLException e) {
+			if (rs.next()) {
+				dining=(new Dining(rs.getInt(1),rs.getString(2)));
+				return dining;
+			}else {
+				return null;
+			
+		}} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;

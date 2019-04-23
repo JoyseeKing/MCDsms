@@ -50,5 +50,5 @@ public class Manager implements Serializable{
 	public String toString() {
 		return  mid + "\t" + maccount + "\t" + mpassword + "\t" + mname ;
 	}
-	
+
 }

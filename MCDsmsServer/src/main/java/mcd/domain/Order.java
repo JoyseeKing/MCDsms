@@ -63,5 +63,10 @@ public class Order implements Serializable{
 	public void setEid(int eid) {
 		this.eid = eid;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return oid+"\t"+ototal+"\t"+ocollect+"\t"+ochange+"\t"+date+"\t"+eid ;
+	}
+
 }

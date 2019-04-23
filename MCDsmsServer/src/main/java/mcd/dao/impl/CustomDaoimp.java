@@ -39,8 +39,11 @@ public class CustomDaoimp implements CustomDao{
 			ResultSet rs=this.db.Query(sql,id);
 			if(rs.next()) {
 				custom=new Custom(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(5), rs.getDouble(6), rs.getString(7));
+				return custom;
+			}else {
+				return null;
 			}
-			return custom;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +61,7 @@ public class CustomDaoimp implements CustomDao{
 		String sql1=" insert  into VIP values(?,?,?,'否')";
 		int i1;
 		try {
-			i1 = this.db.Update(sql1,vipid,viplevel,balance );
+			i1 = this.db.Update(sql1,vipid,viplevel,balance);
 			if (i1>0) {
 				String sql2="insert into Custom values(?,?,?)";
 				int i2=this.db.Update(sql2, cusid,cusname,vipid);
@@ -89,7 +92,7 @@ public class CustomDaoimp implements CustomDao{
 			rs = this.db.Query(sql1, vipid);
 			if (rs.next()) {
 				balance=rs.getInt(1);
-				String sql2="update from VIP set balance=? where vipid=?"; 
+				String sql2="update VIP set balance=? where vipid=?"; 
 				double total=balance+pay;
 				int i=this.db.Update(sql2, total,vipid);
 				return i>0;

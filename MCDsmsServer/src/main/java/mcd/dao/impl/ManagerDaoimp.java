@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mcd.dao.MangerDao;
-import mcd.domain.Employee;
 import mcd.domain.Manager;
+import mcd.serviceimp.TotalServiceimp;
 import mcd.util.Camera;
 import mcd.util.DbUtil;
 import mcd.util.Face;
@@ -23,7 +23,7 @@ public class ManagerDaoimp implements MangerDao{
 		Manager man=new Manager();
 		this.db=new DbUtil();
 		
-		String sql="select * from manger where maccount=? and mpassword=?";
+		String sql="select * from manager where maccount=? and mpassword=?";
 		try {
 			ResultSet rs=this.db.Query(sql,account,password);
 			if (rs.next()) {
@@ -62,7 +62,8 @@ public class ManagerDaoimp implements MangerDao{
 		// TODO Auto-generated method stub
 		Manager man=new Manager();
 		this.db=new DbUtil();
-		String sql="select * from Manager where mid=?";
+		
+		String sql="select * from Manager where manid=?";
 		try {
 			ResultSet rs=this.db.Query(sql,mid);
 			if (rs.next()) {
@@ -82,20 +83,23 @@ public class ManagerDaoimp implements MangerDao{
 
 	public Manager mlogin(String account) {
 		// TODO Auto-generated method stub
-		
+		this.db=new DbUtil();
+		this.camera=new Camera();
+		this.face=new Face();
 		Manager man=new Manager();
 				String sql="select * from Manager where maccount=?";
 				try {
 					ResultSet rs=this.db.Query(sql,account);
 					if (rs.next()) {
-						camera.face(account+"login");
-						if (face.getConfidence(account, account+"login")>0.75) {
-							File file = new File(account+"login.jpg");
+						this.camera.face("man/"+account+"login");
+						if (this.face.getConfidence("man/"+account, "man/"+account+"login")>75) {
+							System.out.println(face.getConfidence("man/"+account, "man/"+account+"login"));
+							File file = new File("man/"+account+"login.jpg");
 					                file.delete();
 					                man=new Manager(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
 					                return man;
 						}else {
-							File file = new File(account+"login.jpg");
+							File file = new File("man/"+account+"login.jpg");
 					                file.delete();
 					                return null;
 						}
@@ -117,10 +121,13 @@ public class ManagerDaoimp implements MangerDao{
 	}
 
 	public boolean mregist(int id, String account, String password, String name) {
+		this.db=new DbUtil();
+		this.camera=new Camera();
 		String sql="insert into manager values(?,?,?,?)";
 		try {
 			int i=this.db.Update(sql,id,account,password,name);
-			camera.face(account);
+//			ts.Camera(account+"login");
+			this.camera.face("man/"+account);
 			return i>0;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -130,8 +137,6 @@ public class ManagerDaoimp implements MangerDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-		}finally {
-			this.db.close();
 		}
 	}
 

@@ -12,5 +12,5 @@ public interface OrderBiz {
 	//导出订单
 	public String outXML(int eid);
 	//根据oid修改订单
-	public String updateOrderByoid(String oid,double ototal,double ocollcet,double ochange,String date);
+	public String updateOrderByoid(String oid,double ototal,double ocollcet,double ochange,Date  date);
 }

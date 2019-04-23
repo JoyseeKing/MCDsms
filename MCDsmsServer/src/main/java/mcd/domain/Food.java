@@ -83,9 +83,9 @@ public class Food implements Serializable{
 	public void setTypename(String typename) {
 		this.typename = typename;
 	}
+	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return fid + "\t" + fname + "\t" + fprice + "\t" + sellnum+ "\t" + fstatus ;
+		return fid + "\t" + fname + "\t" + fprice + "\t" + sellnum+ "\t" + typename + "\t" +fstatus;
 	}
 }

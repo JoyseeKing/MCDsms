@@ -26,7 +26,7 @@ public class ManagerBizimp implements ManagerBiz{
 
 	public Manager findMgrByid(int mid) {
 		// TODO Auto-generated method stub
-		return this.findMgrByid(mid);
+		return this.mangerDao.findMgrByid(mid);
 	}
 
 	public Manager mlogin(String account) {
