@@ -2,6 +2,7 @@ package mcd.dao.impl;
 
 
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.bytedeco.javacpp.RealSense.intrinsics;
 
 import mcd.dao.OrderDao;
 
@@ -70,16 +73,17 @@ public class OrderDaoimp implements OrderDao {
 		
 	}
 
-	public boolean outXML(int eid) {
+	public byte[] outXML(int eid) {
 		// TODO Auto-generate00d method stub
 		boolean flag=false;
 		BufferedWriter bw=null;
+		FileInputStream fis=null;
 		List<Order> list1 =new ArrayList<Order>();
 		List<String> list2=new ArrayList<String>();
 		try {
 			bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(eid+".xls")));
 			this.db=new DbUtil();
-			if (flag!=true) {
+			
 				String sql="select * from Order1 where empid=? ";
 
 				ResultSet rs=this.db.Query(sql,eid);
@@ -95,19 +99,27 @@ public class OrderDaoimp implements OrderDao {
 					bw.newLine();
 					bw.flush();
 				}
-				flag=true;
-			} }catch (FileNotFoundException e1) {
+				fis=new FileInputStream(eid+".xls");
+				byte[] b=new byte[fis.available()];
+				int n;
+				while ((n=fis.read(b))!=-1) {
+					fis.read(b);
+				}
+				fis.close();
+				return b;
+//				flag=true;
+			 }catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				return false;
+				return null;
 			}catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				flag=false;
+				return null;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				flag=false;
+				return null;
 			}finally {
 				this.db.close();
 				if (bw!=null) {
@@ -118,8 +130,9 @@ public class OrderDaoimp implements OrderDao {
 						e.printStackTrace();
 					}
 				}
-			}		
-		return flag;
+			}
+		
+		
 	}	
 
 

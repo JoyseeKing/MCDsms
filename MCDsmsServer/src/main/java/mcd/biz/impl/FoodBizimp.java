@@ -25,7 +25,7 @@ public class FoodBizimp implements FoodBiz{
 
 	public String addFood(int fid, String fname, double fprice, int sellnum, int fstatus, int typeid) {
 		// TODO Auto-generated method stub
-		return this.foodDao.addFood(fid, fname, fprice, sellnum, fstatus, typeid)?"菜品更改成功":"菜品更改失败";
+		return this.foodDao.addFood(fid, fname, fprice, sellnum, fstatus, typeid)?"菜品添加成功":"菜品添加失败";
 	}
 
 	public String updatestatus(int fid, int status) {
@@ -51,6 +51,11 @@ public class FoodBizimp implements FoodBiz{
 	public String foodCutOff(int fid, double cut) {
 		// TODO Auto-generated method stub
 		return this.foodDao.foodCutOff(fid, cut)?"设置折扣成功":"设置折扣失败";
+	}
+	@Override
+	public List<Food> findTopFive() {
+		// TODO Auto-generated method stub
+		return this.foodDao.findTopFive();
 	}
 	@Override
 	public List<Food> findTopFiveMonth() {

@@ -38,5 +38,17 @@ public class ManagerBizimp implements ManagerBiz{
 		// TODO Auto-generated method stub
 		return this.mangerDao.mregist(id, account, password, name)?"注册成功":"注册失败";
 	}
+
+	@Override
+	public Manager mlogin(String account, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.mangerDao.mlogin(account, b);
+	}
+
+	@Override
+	public String mregist(int id, String account, String password, String name, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.mangerDao.mregist(id, account, password, name, b)?"注册成功":"注册失败";
+	}
 	
 }

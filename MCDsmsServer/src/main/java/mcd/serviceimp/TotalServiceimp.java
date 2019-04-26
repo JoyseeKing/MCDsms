@@ -131,7 +131,7 @@ public class TotalServiceimp implements TotalService{
 		return this.orderBiz.FindOrderbyid(oid);
 	}
 
-	public String outXML(int eid) {
+	public byte[] outXML(int eid) {
 		// TODO Auto-generated method stub
 		return this.orderBiz.outXML(eid);
 	}
@@ -222,11 +222,38 @@ public class TotalServiceimp implements TotalService{
 	}
 
 	@Override
+	public List<Food> findTopFive() {
+		// TODO Auto-generated method stub
+		return this.foodBiz.findTopFive();
+	}
+
+	@Override
+	public Manager mlogin(String account, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.managerbiz.mlogin(account, b);
+	}
+
+	@Override
+	public String mregist(int id, String account, String password, String name, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.managerbiz.mregist(id, account, password, name, b);
+	}
+
+	@Override
+	public Employee elogin(String account, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.empBiz.elogin(account, b);
+	}
+
+	@Override
+	public String eregist(int id, String account, String password, String name, int mid, int dinid, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.empBiz.eregist(id, account, password, name, mid, dinid, b);
+	}
+
+	@Override
 	public List<Food> findTopFiveMonth() {
 		// TODO Auto-generated method stub
 		return this.foodBiz.findTopFiveMonth();
-	}
-
-	
-	
+	}	
 }

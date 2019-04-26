@@ -21,6 +21,8 @@ public interface FoodBiz {
 	public List<Food> findAllFoodTypes();
 	//根据id查菜品
 	public Food findFoodByid(int fid);
+	//查询总销量的前五
+	public List<Food> findTopFive();
 	//查询一个月的前五
 	public List<Food> findTopFiveMonth();
 }

@@ -26,9 +26,9 @@ public class OrderBizimp implements OrderBiz{
 		return this.orderDao.FindOrderbyid(oid);
 	}
 
-	public String outXML(int eid) {
+	public byte[] outXML(int eid) {
 		// TODO Auto-generated method stub
-		return this.orderDao.outXML(eid)?"导出成功":"导出失败";
+		return this.orderDao.outXML(eid);
 	}
 
 	public String updateOrderByoid(String oid, double ototal, double ocollcet, double ochange, Date date) {

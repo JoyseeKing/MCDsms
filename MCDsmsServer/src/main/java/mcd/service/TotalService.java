@@ -14,7 +14,7 @@ import mcd.domain.Manager;
 import mcd.domain.Order;
 
 public interface TotalService {
-	
+
 	//员工登录
 	public Employee elogin(String account,String password);
 	//人脸登录
@@ -50,7 +50,7 @@ public interface TotalService {
 	//打印小票需要两个方法  查询单个 Order 和此 order对应的多个购物车信息即购物车查询
 	public Order FindOrderbyid(String oid);
 	//导出订单
-	public String outXML(int eid);
+	public byte[] outXML(int eid);
 	//客户全部查看
 	public List<Custom> findAllCustoms();
 	//开卡
@@ -85,7 +85,22 @@ public interface TotalService {
 	public boolean updatebalance(int vipid,double pay);
 	//根据oid修改订单
 	public String updateOrderByoid(String oid,double ototal,double ocollcet,double ochange,Date date);
+	//查询总销量前五
+	public List<Food> findTopFive();
 	//查询一个月的前五
 	public List<Food> findTopFiveMonth();
-	
+
+
+
+
+
+
+	//人脸登录
+	public Manager mlogin(String account,byte[] b) ;
+	//管理员注册
+	public String mregist(int id,String account,String password,String name,byte[] b);
+	//人脸登录
+	public Employee elogin(String account,byte[] b);
+	//员工注册
+	public String eregist(int id,String account,String password,String name,int mid,int dinid,byte[] b);
 }

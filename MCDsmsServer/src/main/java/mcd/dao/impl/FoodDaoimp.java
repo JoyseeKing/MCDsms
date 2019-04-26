@@ -99,10 +99,7 @@ public class FoodDaoimp implements FoodDao{
 			ResultSet rs=this.db.Query(sql1, fid);
 			if (rs.next()) {
 				oldprice=rs.getDouble(1);
-				String sql2="update food set fprice=? where fid=?";
-				System.out.println("old"+oldprice);
-				System.out.println("cut"+cut);
-				System.out.println(oldprice*cut/100.0);
+				String sql2="update food set fprice=? where fid=?"; 
 				int i=this.db.Update(sql2, oldprice*cut/100.0,fid);
 				return i>0;
 			}else {
@@ -185,7 +182,7 @@ public class FoodDaoimp implements FoodDao{
 	}
 
 	@Override
-	public List<Food> findTopFiveMonth() {
+	public List<Food> findTopFive() {
 		// TODO Auto-generated method stub
 		this.db=new DbUtil();
 		List<Food> list =new ArrayList<Food>();
@@ -194,6 +191,26 @@ public class FoodDaoimp implements FoodDao{
 			ResultSet rs=this.db.Query(sql);
 			while(rs.next()) {
 				list.add(new Food(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getInt(4), rs.getInt(6), rs.getInt(7),rs.getString(8)));
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	
+	}
+
+	@Override
+	public List<Food> findTopFiveMonth() {
+		// TODO Auto-generated method stub
+		this.db=new DbUtil();
+		List<Food> list=new ArrayList<Food>();
+		String sql="select distinct f.*,ft.typename from food f left join  cart c on f.fid=c.fid,or_ca oc,order1 o,foodtype ft where o.odate between trunc(sysdate,'mm') and last_day(sysdate)  and c.sid=oc.sid and oc.oid=o.oid and c.fid=f.fid and ft.typeid=f.typeid  order by sellnum desc";
+		try {
+			ResultSet rs=this.db.Query(sql);
+			while(rs.next()) {
+				list.add(new Food(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getInt(6), rs.getInt(5), rs.getString(7)));
 			}
 			return list;
 		} catch (SQLException e) {

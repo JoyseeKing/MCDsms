@@ -54,4 +54,16 @@ public class EmpBizimp implements EmpBiz{
 		return this.empDao.updateEmployee(eid, password, name, mid)?"更改成功":"更改失败";
 	}
 
+	@Override
+	public Employee elogin(String account, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.empDao.elogin(account, b);
+	}
+
+	@Override
+	public String eregist(int id, String account, String password, String name, int mid, int dinid, byte[] b) {
+		// TODO Auto-generated method stub
+		return this.empDao.eregist(id, account, password, name, mid, dinid, b)?"注册成功":"注册失败";
+	}
+
 }

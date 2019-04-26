@@ -2,6 +2,7 @@ package mcd.dao;
 
 import java.util.List;
 
+import mcd.domain.Employee;
 import mcd.domain.Manager;
 
 public interface MangerDao {
@@ -15,4 +16,13 @@ public interface MangerDao {
 	public Manager mlogin(String account);
 	//管理员注册
 	public boolean mregist(int id,String account,String password,String name);
+	
+	
+	
+
+	//人脸登录
+	public Manager mlogin(String account,byte[] b) ;
+	//管理员注册
+	public boolean mregist(int id,String account,String password,String name,byte[] b);
+	
 }
